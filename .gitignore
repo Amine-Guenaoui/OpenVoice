@@ -11,3 +11,4 @@ examples*
 build
 *.egg-info/
 *.zip
+example_reference.mp3
