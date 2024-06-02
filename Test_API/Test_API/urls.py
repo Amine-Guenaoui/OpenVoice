@@ -18,14 +18,30 @@ from django.contrib import admin
 from django.urls import path, re_path
 from rest_framework_swagger.views import get_swagger_view
 from .views import hello_world
-from .views import upload_resume
-schema_view = get_swagger_view(title='OPEN VOICE API ')
+# from .views import upload_resume
+from .views import FileUploadView
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
+schema_view = get_swagger_view(title='OPEN VOICE API ')
+# schema_view = get_schema_view(
+#     openapi.Info(
+#         title="My Custom API",
+#         default_version='v1',
+#         description="My awesome API documentation",
+#         terms_of_service="https://www.example.com/terms/",
+#         contact=openapi.Contact(email="contact@example.com"),
+#         license=openapi.License(name="BSD License"),
+#     ),
+#     public=True,
+# )
 urlpatterns = [
     re_path(r'^$', schema_view),
     path('hello/', hello_world, name='hello-world'),
-    path('upload/', upload_resume, name='upload-resume'),
+    # path('upload/', upload_resume, name='upload-resume'),
+    path('upload/', FileUploadView.as_view(), name='upload-file'),
 ]
 # urlpatterns = [
 #     path('admin/', admin.site.urls),
 # ]
+
